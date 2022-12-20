@@ -13,7 +13,64 @@ export default function Map() {
     const [startDate, setStartDate] = useState();
     const [endDate, setEndDate] = useState();
 
-
+    const counterMeasureMap = [
+        {id:1,name:"High friction surface treatment (HFST) for horizontal curves"}
+        ,{id:2,name:"High friction surface treatment (HFST)"}
+        ,{id:3,name:"Raised Pavement Markers (RPM)"}
+        ,{id:4,name:"Pavement edge and centerline markings"}
+        ,{id:5,name:"Speed management for pedestrian safety improvement"}
+        ,{id:6,name:"Post-mounted delineation"}
+        ,{id:7,name:"Enhanced signs and markings for curves"}
+        ,{id:8,name:"in-lane curve warning pavement markings"}
+        ,{id:9,name:"Larger signs"}
+        ,{id:10,name:"Signs with enhanced retroreflectivity"}
+        ,{id:11,name:"Dynamic advance curve warning signs and sequential curve signs"}
+        ,{id:12,name:"chevron signs on horizontal curves"}
+        ,{id:13,name:"Install shoulder rumble strips (horizontal curves)"}
+        ,{id:14,name:"Install icy curve warning system"}
+        ,{id:15,name:"Advance static curve warning signs"}
+        ,{id:16,name:"Oversized chevron signs"}
+        ,{id:17,name:"Install paved shoulder 2ft"}
+        ,{id:18,name:"Install paved shoulder 4ft"}
+        ,{id:19,name:"Install paved shoulder 8ft"}
+        ,{id:20,name:"Install paved shoulder >8ft"}
+        ,{id:21,name:"Widen shoulder"}
+        ,{id:22,name:"Road side guardrail"}
+        ,{id:23,name:"Road side barrier"}
+        ,{id:24,name:"Shoulder rumble strips"}
+        ,{id:25,name:"Edgeline rumble strips"}
+        ,{id:26,name:"Concrete barrier"}
+        ,{id:27,name:"Edgeline marking"}
+        ,{id:28,name:"Expand clear zone"}
+        ,{id:29,name:"Remove or relocate fixed objects outside of clear zone"}
+        ,{id:30,name:"Increase lateral clearance"}
+        ,{id:31,name:"Install safety edge treatment"}
+        ,{id:32,name:"Curb and gutter (closed section roadway)"}
+        ,{id:33,name:"Improve pavement friction (Chip Seal)"}
+        ,{id:34,name:"Improve pavement friction (Diamond grinding)"}
+        ,{id:35,name:"Improve pavement friction (grooving)"}
+        ,{id:36,name:"Improve pavement friction (OGFC-Open Graded Friction Course)"}
+        ,{id:37,name:"Improve pavement friction (Slurry seal)"}
+        ,{id:38,name:"Improve pavement friction (UTBWC-Ultra thin bonded wearing course)"}
+        ,{id:39,name:"Change lane width from X to Y (in feet)"}
+        ,{id:40,name:"speed management plan"}
+        ,{id:41,name:"Change posted speed limit from X MPH to Y MPH"}
+        ,{id:42,name:"Install dynamic speed feedback sign"}
+        ,{id:43,name:"Speed hump"}
+        ,{id:44,name:"Road diet"}
+        ,{id:45,name:"ASE"}
+        ,{id:46,name:"Install Advance Downgrade Warning Sign"}
+        ,{id:47,name:"Bike lanes"}
+        ,{id:48,name:"install roadway lighting"}
+        ,{id:49,name:"Median barrier"}
+        ,{id:50,name:"Median cable barrier"}
+        ,{id:51,name:"Median guardrial"}
+        ,{id:52,name:"Centerline rumble strips"}
+        ,{id:53,name:"Centerline rumble strips on horizontal curves"}
+        ,{id:54,name:"Centerline rumble strips on tangent sections"}
+        ,{id:55,name:"Introduce TWLTL (two-way left turn lanes)"}
+        ,{id:56,name:"Raised crosswalk"}
+        ,{id:57,name:"sidewalk"}];
     const countyMap = [
         {id: '1', name: 'Allegany'},
         {id: '2', name: 'Anne Arundel'},
@@ -231,12 +288,12 @@ export default function Map() {
                 outFields: ["*"]
             });
             map.add(parcelLayer)
-            countyMap.forEach((p) => {
-                let option = document.createElement("option");
-                option.innerHTML = p.name;
-                option.value = 'COUNTY=' + p.id;
-                countySelect.appendChild(option);
-            })
+            // countyMap.forEach((p) => {
+            //     let option = document.createElement("option");
+            //     option.innerHTML = p.name;
+            //     option.value = 'COUNTY=' + p.id;
+            //     countySelect.appendChild(option);
+            // })
             // parcelLayer.queryFeatures({
             //     where: "1=1",  // Set by select element
             //     spatialRelationship: "intersects", // Relationship operation to apply
@@ -635,7 +692,7 @@ export default function Map() {
                     </option>
                 </select>
             </div>
-            <br/>
+            <br/><br/>
             {locationType==="Segment"&&<div id="segmentDiv" className="esri-widget">
                 <h2 id="mainLabel">Location Info</h2>
                 <br/>
@@ -656,7 +713,7 @@ export default function Map() {
                 </div>
                 <br/><br/>
                 <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'left', alignItems: 'center'}}>
-                    <label id="prefixLabel">Route Name: </label>
+                    <label id="prefixLabel">RO:&nbsp;&nbsp;&nbsp;</label>
                     <select id="routeSelect"
                             value={route}
                             onChange={(e) => {
@@ -666,7 +723,7 @@ export default function Map() {
                 </div>
                 <br/><br/>
                 <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'left', alignItems: 'center'}}>
-                    <label id="routeNoLabel">Route ID: </label>
+                    <label id="routeNoLabel">Route Number: </label>
                     <select id="routeIdSelect"
                             value={routeID}
                             onChange={(e) => {
@@ -675,16 +732,6 @@ export default function Map() {
                     />
                 </div>
                 <br/><br/>
-                <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'left', alignItems: 'center'}}>
-
-                    <label id="countMeasureLabel">CounterMeasure: </label>
-                    <input id="countMeasureInput"
-                           value={countMeasure}
-                           onChange={(e) => {
-                               setCountMeasure(e.target.value)
-                           }}
-                    />
-                </div>
                 <br/>
                 <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'left', alignItems: 'center'}}>
 
@@ -705,7 +752,25 @@ export default function Map() {
                                setmilePointEnd(e.target.value)
                            }}
                     /></div>
-                <br/><br/><br/>
+                <br/>
+                <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'left', alignItems: 'center'}}>
+
+                    <label id="countMeasureLabel">CounterMeasure: </label>
+                    <select id="countMeasureInput"
+                           value={countMeasure}
+                           onChange={(e) => {
+                               setCountMeasure(e.target.value)
+                           }}
+                    >
+
+                        {counterMeasureMap.map(p => (
+                            <option key={"counterMeasure" + p.id} value={p.name}>
+                                {p.name}
+                            </option>
+                        ))}
+                    </select>
+                </div>
+                <br/><br/>
                 <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'left', alignItems: 'center'}}>
                     <label id="startDateLabel">Start Date: </label>
                     <input id="startDateInput"
