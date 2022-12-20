@@ -3,6 +3,7 @@ import {loadModules} from 'esri-loader';
 
 export default function Map() {
     const mapRef = useRef(null);
+    const [locationType,setLocationType] = useState("Segment");
     const [county, setCounty] = useState("");
     const [route, setRoute] = useState("");
     const [routeID, setRouteID] = useState("");
@@ -126,6 +127,11 @@ export default function Map() {
             // countyLabel.appendChild(countyText);
 
             // const countySelect = document.createElement("select", "");
+            // locationTypeSelect
+            // const locationTypeSelect = document.getElementById('locationTypeSelect');
+            // document.getElementById('locationTypeSelect').setAttribute("class", "esri-widget esri-select");
+            // locationTypeSelect.setAttribute("style", "paddingLeft: '10px';width: 200px; font-family: 'Avenir Next'; font-size: 1em; ");
+
             const countySelect = document.getElementById('countySelect');
             document.getElementById('countySelect').setAttribute("class", "esri-widget esri-select");
             countySelect.setAttribute("style", "paddingLeft: '10px';width: 200px; font-family: 'Avenir Next'; font-size: 1em; ");
@@ -166,13 +172,13 @@ export default function Map() {
             endDate.setAttribute("class", "esri-widget esri-input");
             endDate.setAttribute("style", "width: 200px; font-family: 'Avenir Next'; font-size: 1em; float: right;");
 
-            const locationTypeSelect = document.createElement("select", "");
+            const locationTypeSelect = document.getElementById('locationTypeSelect');
             locationTypeSelect.setAttribute("class", "esri-widget esri-select");
             locationTypeSelect.setAttribute("style", "width: 200px; font-family: 'Avenir Next'; font-size: 1em; float: right; ");
-            let option = document.createElement("option");
-            option.innerHTML = "Segment";
-            option.value = 'locationType=Segment';
-            locationTypeSelect.appendChild(option);
+            // let option = document.createElement("option");
+            // option.innerHTML = "Segment";
+            // option.value = 'locationType=Segment';
+            // locationTypeSelect.appendChild(option);
 
 
             // let startDatePicker = new DatePicker({
@@ -318,7 +324,7 @@ export default function Map() {
             // view.ui.add(startDate, "top-right");
             // view.ui.add(endDateLabel, "manual");
             // view.ui.add(endDate, "top-right");
-            document.getElementById("infoDiv").style.display = "block";
+            document.getElementById("segmentDiv").style.display = "block";
 
 
             const saveProjectButton = document.getElementById("saveButton");
@@ -609,7 +615,28 @@ export default function Map() {
     return (
         <div>
             <div style={{height: '100vh', width: '75vw', float: 'left'}} ref={mapRef}/>
-            <div id="infoDiv" className="esri-widget">
+            <br/>
+            <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'left', alignItems: 'center'}}>
+                <label id="locationTypeLabel">Location Type: </label>
+                <select id="locationTypeSelect"
+                        value={locationType}
+                        onChange={(e) => setLocationType(e.target.value)}
+                    // style={{width: '200px', fontFamily: 'Avenir Next', fontSize: '1em', float: 'left'}}
+                    // onChange={setCounty}
+                >
+                        <option key={"locationType1"} value={"Segment"}>
+                            {"Segment"}
+                        </option>
+                    <option key={"locationType2"} value={"Intersection"}>
+                        {"Intersection"}
+                    </option>
+                    <option key={"locationType3"} value={"Ramp"}>
+                        {"Ramp"}
+                    </option>
+                </select>
+            </div>
+            <br/>
+            {locationType==="Segment"&&<div id="segmentDiv" className="esri-widget">
                 <h2 id="mainLabel">Location Info</h2>
                 <br/>
                 <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'left', alignItems: 'center'}}>
@@ -700,7 +727,7 @@ export default function Map() {
                 <button id="saveButton"/>
                 <br/><br/>
                 <button id="crashButton"/>
-            </div>
+            </div>}
         </div>
 
     )
