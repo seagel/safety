@@ -1,7 +1,5 @@
 import React, {useEffect, useRef, useState} from 'react';
 import {loadModules} from 'esri-loader';
-import Autocomplete from '@mui/material/Autocomplete';
-import {TextField} from "@mui/material";
 
 export default function Map() {
     const mapRef = useRef(null);
