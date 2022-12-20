@@ -8,6 +8,11 @@ export default function Map() {
     const [routeID, setRouteID] = useState("");
     const [milePointStart, setMilePointStart] = useState();
     const [milePointEnd, setmilePointEnd] = useState();
+    const [countMeasure, setCountMeasure] = useState();
+    const [startDate, setStartDate] = useState();
+    const [endDate, setEndDate] = useState();
+
+
     const countyMap = [
         {id: '1', name: 'Allegany'},
         {id: '2', name: 'Anne Arundel'},
@@ -123,7 +128,7 @@ export default function Map() {
             // const countySelect = document.createElement("select", "");
             const countySelect = document.getElementById('countySelect');
             document.getElementById('countySelect').setAttribute("class", "esri-widget esri-select");
-            countySelect.setAttribute("style", "position: 'relative';width: 200px; font-family: 'Avenir Next'; font-size: 1em; float: right;");
+            countySelect.setAttribute("style", "paddingLeft: '10px';width: 200px; font-family: 'Avenir Next'; font-size: 1em; ");
             // countyText.appendChild(countyText);
             const routeSelect = document.getElementById('routeSelect');
             routeSelect.setAttribute("class", "esri-widget esri-select");
@@ -146,12 +151,17 @@ export default function Map() {
             milePointEndInput.setAttribute("class", "esri-widget esri-input");
             milePointEndInput.setAttribute("style", "width: 200px; font-family: 'Avenir Next'; font-size: 1em; float: right;");
 
-            const startDate = document.createElement("input", "");
+
+            const countMeasureInput = document.getElementById('countMeasureInput');
+            countMeasureInput.setAttribute("class", "esri-widget esri-input");
+            countMeasureInput.setAttribute("style", "width: 200px; font-family: 'Avenir Next'; font-size: 1em; float: right; ");
+
+            const startDate = document.getElementById('startDateInput');
             startDate.setAttribute("type", "date");
             startDate.setAttribute("class", "esri-widget esri-input");
             startDate.setAttribute("style", "width: 200px; font-family: 'Avenir Next'; font-size: 1em; float: right;");
 
-            const endDate = document.createElement("input", "");
+            const endDate = document.getElementById('endDateInput');
             endDate.setAttribute("type", "date");
             endDate.setAttribute("class", "esri-widget esri-input");
             endDate.setAttribute("style", "width: 200px; font-family: 'Avenir Next'; font-size: 1em; float: right;");
@@ -618,46 +628,77 @@ export default function Map() {
                     </select>
                 </div>
                 <br/><br/>
-                <div style={{display:'flex', flexDirection: 'row', justifyContent: 'left', alignItems: 'center'}}>
-                <label id="prefixLabel">Route Name: </label>
-                <select id="routeSelect"
-                        value={route}
-                        onChange={(e) => {
-                            setRoute(e.target.value)
-                        }}
-                />
-                </div>
-                    <br/><br/>
-                <div style={{display:'flex', flexDirection: 'row', justifyContent: 'left', alignItems: 'center'}}>
-                <label id="routeNoLabel">Route ID: </label>
-                <select id="routeIdSelect"
-                        value={routeID}
-                        onChange={(e) => {
-                            setRouteID(e.target.value)
-                        }}
-                />
+                <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'left', alignItems: 'center'}}>
+                    <label id="prefixLabel">Route Name: </label>
+                    <select id="routeSelect"
+                            value={route}
+                            onChange={(e) => {
+                                setRoute(e.target.value)
+                            }}
+                    />
                 </div>
                 <br/><br/>
-                <label id="mpFromLabel">MP From: </label>
-                <input id="milePointStartInput"
-                       value={milePointStart}
-                       onChange={(e) => {
-                           setMilePointStart(e.target.value)
-                       }}
-                />
-                <div/>
+                <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'left', alignItems: 'center'}}>
+                    <label id="routeNoLabel">Route ID: </label>
+                    <select id="routeIdSelect"
+                            value={routeID}
+                            onChange={(e) => {
+                                setRouteID(e.target.value)
+                            }}
+                    />
+                </div>
                 <br/><br/>
-                <div style={{display:'flex', flexDirection: 'row', justifyContent: 'left', alignItems: 'center'}}>
-                <label id="mpToLabel">MP To: </label>
-                <input id="milePointEndInput"
-                       value={milePointEnd}
-                       onChange={(e) => {
-                           setmilePointEnd(e.target.value)
-                       }}
-                /></div>
-                    <br/><br/><br/>
+                <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'left', alignItems: 'center'}}>
 
-                <button id="saveButton"/><br/><br/>
+                    <label id="countMeasureLabel">CounterMeasure: </label>
+                    <input id="countMeasureInput"
+                           value={countMeasure}
+                           onChange={(e) => {
+                               setCountMeasure(e.target.value)
+                           }}
+                    />
+                </div>
+                <br/>
+                <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'left', alignItems: 'center'}}>
+
+                    <label id="mpFromLabel">MP From: </label>
+                    <input id="milePointStartInput"
+                           value={milePointStart}
+                           onChange={(e) => {
+                               setMilePointStart(e.target.value)
+                           }}
+                    />
+                </div>
+                <br/><br/>
+                <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'left', alignItems: 'center'}}>
+                    <label id="mpToLabel">MP To: </label>
+                    <input id="milePointEndInput"
+                           value={milePointEnd}
+                           onChange={(e) => {
+                               setmilePointEnd(e.target.value)
+                           }}
+                    /></div>
+                <br/><br/><br/>
+                <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'left', alignItems: 'center'}}>
+                    <label id="startDateLabel">Start Date: </label>
+                    <input id="startDateInput"
+                           value={startDate}
+                           onChange={(e) => {
+                               setStartDate(e.target.value)
+                           }}
+                    /></div>
+                <br/>
+                <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'left', alignItems: 'center'}}>
+                    <label id="endDateLabel">MP To: </label>
+                    <input id="endDateInput"
+                           value={endDate}
+                           onChange={(e) => {
+                               setEndDate(e.target.value)
+                           }}
+                    /></div>
+<br/>
+                <button id="saveButton"/>
+                <br/><br/>
                 <button id="crashButton"/>
             </div>
         </div>
