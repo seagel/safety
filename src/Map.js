@@ -716,7 +716,7 @@ export default function Map() {
                     /></div>
                 <br/>
                 <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'left', alignItems: 'center'}}>
-                    <label id="endDateLabel">MP To: </label>
+                    <label id="endDateLabel">EndDate: </label>
                     <input id="endDateInput"
                            value={endDate}
                            onChange={(e) => {
