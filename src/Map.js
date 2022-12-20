@@ -217,9 +217,9 @@ export default function Map() {
             milePointEndInput.setAttribute("style", "width: 200px; font-family: 'Avenir Next'; font-size: 1em; float: right;");
 
 
-            // const countMeasureInput = document.getElementById('countMeasureInput');
-            // countMeasureInput.setAttribute("class", "esri-widget");
-            // countMeasureInput.setAttribute("style", "width: 200px; font-family: 'Avenir Next'; font-size: 1em; float: right; ");
+            const countMeasureInput = document.getElementById('countMeasureInput');
+            countMeasureInput.setAttribute("class", "esri-widget esri-input");
+            countMeasureInput.setAttribute("style", "width: 200px; font-family: 'Avenir Next'; font-size: 1em; float: right; ");
 
             const startDate = document.getElementById('startDateInput');
             startDate.setAttribute("type", "date");
@@ -759,26 +759,26 @@ export default function Map() {
 
                     <label id="countMeasureLabel">CounterMeasure: </label>
                     {/*<SelectSearch id="countMeasureInput" options={counterMeasureMap} search={true} placeholder="Choose your countermeasure" />*/}
-                    <Autocomplete
-                        disablePortal
-                        id="countMeasureInput"
-                        options={counterMeasureMap}
-                        sx={{ width: 300 }}
-                        renderInput={(params) => <TextField {...params} label="Select a CounterMeasure" />}
-                    />
-                    {/*<select id="countMeasureInput"*/}
-                    {/*       value={countMeasure}*/}
-                    {/*       onChange={(e) => {*/}
-                    {/*           setCountMeasure(e.target.value)*/}
-                    {/*       }}*/}
-                    {/*>*/}
+                    {/*<Autocomplete*/}
+                    {/*    disablePortal*/}
+                    {/*    id="countMeasureInput"*/}
+                    {/*    options={counterMeasureMap}*/}
+                    {/*    sx={{ width: 300 }}*/}
+                    {/*    renderInput={(params) => <TextField {...params} label="CounterMeasure" />}*/}
+                    {/*/>*/}
+                    <select id="countMeasureInput"
+                           value={countMeasure}
+                           onChange={(e) => {
+                               setCountMeasure(e.target.value)
+                           }}
+                    >
 
-                    {/*    {counterMeasureMap.map(p => (*/}
-                    {/*        <option key={"counterMeasure" + p.value} value={p.name}>*/}
-                    {/*            {p.name}*/}
-                    {/*        </option>*/}
-                    {/*    ))}*/}
-                    {/*</select>*/}
+                        {counterMeasureMap.map(p => (
+                            <option key={"counterMeasure" + p.value} value={p.label}>
+                                {p.label}
+                            </option>
+                        ))}
+                    </select>
                 </div>
                 <br/><br/>
                 <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'left', alignItems: 'center'}}>
