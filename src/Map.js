@@ -1,5 +1,7 @@
 import React, {useEffect, useRef, useState} from 'react';
 import {loadModules} from 'esri-loader';
+import Autocomplete from '@mui/material/Autocomplete';
+import {TextField} from "@mui/material";
 
 export default function Map() {
     const mapRef = useRef(null);
@@ -14,63 +16,63 @@ export default function Map() {
     const [endDate, setEndDate] = useState();
 
     const counterMeasureMap = [
-        {id:1,name:"High friction surface treatment (HFST) for horizontal curves"}
-        ,{id:2,name:"High friction surface treatment (HFST)"}
-        ,{id:3,name:"Raised Pavement Markers (RPM)"}
-        ,{id:4,name:"Pavement edge and centerline markings"}
-        ,{id:5,name:"Speed management for pedestrian safety improvement"}
-        ,{id:6,name:"Post-mounted delineation"}
-        ,{id:7,name:"Enhanced signs and markings for curves"}
-        ,{id:8,name:"in-lane curve warning pavement markings"}
-        ,{id:9,name:"Larger signs"}
-        ,{id:10,name:"Signs with enhanced retroreflectivity"}
-        ,{id:11,name:"Dynamic advance curve warning signs and sequential curve signs"}
-        ,{id:12,name:"chevron signs on horizontal curves"}
-        ,{id:13,name:"Install shoulder rumble strips (horizontal curves)"}
-        ,{id:14,name:"Install icy curve warning system"}
-        ,{id:15,name:"Advance static curve warning signs"}
-        ,{id:16,name:"Oversized chevron signs"}
-        ,{id:17,name:"Install paved shoulder 2ft"}
-        ,{id:18,name:"Install paved shoulder 4ft"}
-        ,{id:19,name:"Install paved shoulder 8ft"}
-        ,{id:20,name:"Install paved shoulder >8ft"}
-        ,{id:21,name:"Widen shoulder"}
-        ,{id:22,name:"Road side guardrail"}
-        ,{id:23,name:"Road side barrier"}
-        ,{id:24,name:"Shoulder rumble strips"}
-        ,{id:25,name:"Edgeline rumble strips"}
-        ,{id:26,name:"Concrete barrier"}
-        ,{id:27,name:"Edgeline marking"}
-        ,{id:28,name:"Expand clear zone"}
-        ,{id:29,name:"Remove or relocate fixed objects outside of clear zone"}
-        ,{id:30,name:"Increase lateral clearance"}
-        ,{id:31,name:"Install safety edge treatment"}
-        ,{id:32,name:"Curb and gutter (closed section roadway)"}
-        ,{id:33,name:"Improve pavement friction (Chip Seal)"}
-        ,{id:34,name:"Improve pavement friction (Diamond grinding)"}
-        ,{id:35,name:"Improve pavement friction (grooving)"}
-        ,{id:36,name:"Improve pavement friction (OGFC-Open Graded Friction Course)"}
-        ,{id:37,name:"Improve pavement friction (Slurry seal)"}
-        ,{id:38,name:"Improve pavement friction (UTBWC-Ultra thin bonded wearing course)"}
-        ,{id:39,name:"Change lane width from X to Y (in feet)"}
-        ,{id:40,name:"speed management plan"}
-        ,{id:41,name:"Change posted speed limit from X MPH to Y MPH"}
-        ,{id:42,name:"Install dynamic speed feedback sign"}
-        ,{id:43,name:"Speed hump"}
-        ,{id:44,name:"Road diet"}
-        ,{id:45,name:"ASE"}
-        ,{id:46,name:"Install Advance Downgrade Warning Sign"}
-        ,{id:47,name:"Bike lanes"}
-        ,{id:48,name:"install roadway lighting"}
-        ,{id:49,name:"Median barrier"}
-        ,{id:50,name:"Median cable barrier"}
-        ,{id:51,name:"Median guardrial"}
-        ,{id:52,name:"Centerline rumble strips"}
-        ,{id:53,name:"Centerline rumble strips on horizontal curves"}
-        ,{id:54,name:"Centerline rumble strips on tangent sections"}
-        ,{id:55,name:"Introduce TWLTL (two-way left turn lanes)"}
-        ,{id:56,name:"Raised crosswalk"}
-        ,{id:57,name:"sidewalk"}];
+        {value:1,label:"High friction surface treatment (HFST) for horizontal curves"}
+        ,{value:2,label:"High friction surface treatment (HFST)"}
+        ,{value:3,label:"Raised Pavement Markers (RPM)"}
+        ,{value:4,label:"Pavement edge and centerline markings"}
+        ,{value:5,label:"Speed management for pedestrian safety improvement"}
+        ,{value:6,label:"Post-mounted delineation"}
+        ,{value:7,label:"Enhanced signs and markings for curves"}
+        ,{value:8,label:"in-lane curve warning pavement markings"}
+        ,{value:9,label:"Larger signs"}
+        ,{value:10,label:"Signs with enhanced retroreflectivity"}
+        ,{value:11,label:"Dynamic advance curve warning signs and sequential curve signs"}
+        ,{value:12,label:"chevron signs on horizontal curves"}
+        ,{value:13,label:"Install shoulder rumble strips (horizontal curves)"}
+        ,{value:14,label:"Install icy curve warning system"}
+        ,{value:15,label:"Advance static curve warning signs"}
+        ,{value:16,label:"Oversized chevron signs"}
+        ,{value:17,label:"Install paved shoulder 2ft"}
+        ,{value:18,label:"Install paved shoulder 4ft"}
+        ,{value:19,label:"Install paved shoulder 8ft"}
+        ,{value:20,label:"Install paved shoulder >8ft"}
+        ,{value:21,label:"Widen shoulder"}
+        ,{value:22,label:"Road side guardrail"}
+        ,{value:23,label:"Road side barrier"}
+        ,{value:24,label:"Shoulder rumble strips"}
+        ,{value:25,label:"Edgeline rumble strips"}
+        ,{value:26,label:"Concrete barrier"}
+        ,{value:27,label:"Edgeline marking"}
+        ,{value:28,label:"Expand clear zone"}
+        ,{value:29,label:"Remove or relocate fixed objects outside of clear zone"}
+        ,{value:30,label:"Increase lateral clearance"}
+        ,{value:31,label:"Install safety edge treatment"}
+        ,{value:32,label:"Curb and gutter (closed section roadway)"}
+        ,{value:33,label:"Improve pavement friction (Chip Seal)"}
+        ,{value:34,label:"Improve pavement friction (Diamond grinding)"}
+        ,{value:35,label:"Improve pavement friction (grooving)"}
+        ,{value:36,label:"Improve pavement friction (OGFC-Open Graded Friction Course)"}
+        ,{value:37,label:"Improve pavement friction (Slurry seal)"}
+        ,{value:38,label:"Improve pavement friction (UTBWC-Ultra thin bonded wearing course)"}
+        ,{value:39,label:"Change lane width from X to Y (in feet)"}
+        ,{value:40,label:"speed management plan"}
+        ,{value:41,label:"Change posted speed limit from X MPH to Y MPH"}
+        ,{value:42,label:"Install dynamic speed feedback sign"}
+        ,{value:43,label:"Speed hump"}
+        ,{value:44,label:"Road diet"}
+        ,{value:45,label:"ASE"}
+        ,{value:46,label:"Install Advance Downgrade Warning Sign"}
+        ,{value:47,label:"Bike lanes"}
+        ,{value:48,label:"install roadway lighting"}
+        ,{value:49,label:"Median barrier"}
+        ,{value:50,label:"Median cable barrier"}
+        ,{value:51,label:"Median guardrial"}
+        ,{value:52,label:"Centerline rumble strips"}
+        ,{value:53,label:"Centerline rumble strips on horizontal curves"}
+        ,{value:54,label:"Centerline rumble strips on tangent sections"}
+        ,{value:55,label:"Introduce TWLTL (two-way left turn lanes)"}
+        ,{value:56,label:"Raised crosswalk"}
+        ,{value:57,label:"sidewalk"}];
     const countyMap = [
         {id: '1', name: 'Allegany'},
         {id: '2', name: 'Anne Arundel'},
@@ -215,9 +217,9 @@ export default function Map() {
             milePointEndInput.setAttribute("style", "width: 200px; font-family: 'Avenir Next'; font-size: 1em; float: right;");
 
 
-            const countMeasureInput = document.getElementById('countMeasureInput');
-            countMeasureInput.setAttribute("class", "esri-widget esri-input");
-            countMeasureInput.setAttribute("style", "width: 200px; font-family: 'Avenir Next'; font-size: 1em; float: right; ");
+            // const countMeasureInput = document.getElementById('countMeasureInput');
+            // countMeasureInput.setAttribute("class", "esri-widget");
+            // countMeasureInput.setAttribute("style", "width: 200px; font-family: 'Avenir Next'; font-size: 1em; float: right; ");
 
             const startDate = document.getElementById('startDateInput');
             startDate.setAttribute("type", "date");
@@ -756,19 +758,27 @@ export default function Map() {
                 <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'left', alignItems: 'center'}}>
 
                     <label id="countMeasureLabel">CounterMeasure: </label>
-                    <select id="countMeasureInput"
-                           value={countMeasure}
-                           onChange={(e) => {
-                               setCountMeasure(e.target.value)
-                           }}
-                    >
+                    {/*<SelectSearch id="countMeasureInput" options={counterMeasureMap} search={true} placeholder="Choose your countermeasure" />*/}
+                    <Autocomplete
+                        disablePortal
+                        id="countMeasureInput"
+                        options={counterMeasureMap}
+                        sx={{ width: 300 }}
+                        renderInput={(params) => <TextField {...params} label="Select a CounterMeasure" />}
+                    />
+                    {/*<select id="countMeasureInput"*/}
+                    {/*       value={countMeasure}*/}
+                    {/*       onChange={(e) => {*/}
+                    {/*           setCountMeasure(e.target.value)*/}
+                    {/*       }}*/}
+                    {/*>*/}
 
-                        {counterMeasureMap.map(p => (
-                            <option key={"counterMeasure" + p.id} value={p.name}>
-                                {p.name}
-                            </option>
-                        ))}
-                    </select>
+                    {/*    {counterMeasureMap.map(p => (*/}
+                    {/*        <option key={"counterMeasure" + p.value} value={p.name}>*/}
+                    {/*            {p.name}*/}
+                    {/*        </option>*/}
+                    {/*    ))}*/}
+                    {/*</select>*/}
                 </div>
                 <br/><br/>
                 <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'left', alignItems: 'center'}}>
