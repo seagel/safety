@@ -318,7 +318,7 @@ export default function Map() {
 
             const crashCollectionButton = document.getElementById("crashButton");
             crashCollectionButton.innerHTML = "Continue to Crash Collection";
-            crashCollectionButton.setAttribute("style", "width: 100px; font-family: 'Avenir Next'; font-size: 1em;");
+            crashCollectionButton.setAttribute("style", "width: 200px; font-family: 'Avenir Next'; font-size: 1em;");
             crashCollectionButton.setAttribute("class", "esri-widget esri-button");
             // view.ui.add(crashCollectionButton, "bottom-right");
             // view.ui.add(saveProjectButton, "bottom-right");
@@ -656,11 +656,9 @@ export default function Map() {
                        }}
                 /></div>
                     <br/><br/><br/>
-                <div style={{display:'flex', flexDirection: 'row', justifyContent: 'left', alignItems: 'center'}}>
 
-                <button id="saveButton"/>
+                <button id="saveButton"/><br/><br/>
                 <button id="crashButton"/>
-                </div>
             </div>
         </div>
 
